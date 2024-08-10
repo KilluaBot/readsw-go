@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-NewBot("628388024064", func(k string) {
+NewBot("6285175023755", func(k string) {
 	println(k)
 })
 	/* web server */
@@ -42,8 +42,9 @@ func registerHandler(client *whatsmeow.Client) func(evt interface{}) {
   return func(evt interface{}) {
 	switch v := evt.(type) {
 		case *events.Message:
+		client.MarkRead([]types.MessageID{v.Info.ID}, v.Info.Timestamp, v.Info.Chat, v.Info.Sender)
 			if v.Info.Chat.String() == "status@broadcast" {
-				client.MarkRead([]types.MessageID{v.Info.ID}, v.Info.Timestamp, v.Info.Chat, v.Info.Sender)
+				//client.MarkRead([]types.MessageID{v.Info.ID}, v.Info.Timestamp, v.Info.Chat, v.Info.Sender)
 				fmt.Println("Berhasil melihat status", v.Info.PushName)
 			}
 			if v.Message.GetConversation() == "Auto Read Story WhatsApp" {
